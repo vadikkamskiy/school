@@ -12,10 +12,10 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+//@Entity
 public class Student {
-    @Id
-    @GeneratedValue
+    //@Id
+    //@GeneratedValue
     private long id;
 
     private String name;
