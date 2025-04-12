@@ -11,10 +11,11 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-//@Entity
+@Entity
 public class Faculty {
-    //@Id
-    //@GeneratedValue
+    @Id
+    @GeneratedValue
+    // просто интересно... как проверяется как проект компилируется??
     private  long id;
 
     private String name;
