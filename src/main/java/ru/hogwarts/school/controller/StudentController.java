@@ -49,9 +49,14 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/findByAge")
     public List<Student> findByAge(@RequestParam int age) {
         return studentService.findByAge(age);
+    }
+
+    @GetMapping("/getAll")
+    public List<Student> allStudents(){
+        return studentService.getAll();
     }
 
 }

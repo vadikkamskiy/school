@@ -15,6 +15,7 @@ import lombok.*;
 public class Faculty {
     @Id
     @GeneratedValue
+    // просто интересно... как проверяется как проект компилируется??
     private  long id;
 
     private String name;
