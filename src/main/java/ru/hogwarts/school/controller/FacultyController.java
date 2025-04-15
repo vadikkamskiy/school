@@ -66,5 +66,5 @@ public class FacultyController {
     return students.isEmpty() 
         ? ResponseEntity.noContent().build() 
         : ResponseEntity.ok(students);
-}
+    }
 }
