@@ -4,11 +4,14 @@ package ru.hogwarts.school.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/student")
@@ -34,7 +37,7 @@ public class StudentController {
         return studentService.addStudent(student);
     }
 
-    @PutMapping
+    @PutMapping("/edit")
     public ResponseEntity<Student> editStudent(@RequestBody Student student) {
         Student foundStudent = studentService.editStudent(student);
         if (foundStudent == null) {
@@ -58,5 +61,23 @@ public class StudentController {
     public List<Student> allStudents(){
         return studentService.getAll();
     }
-
+    @GetMapping("/getByAge")
+    public List<Student> findByAgeBetween(
+        @RequestParam(defaultValue = "0") int byAge ,
+        @RequestParam Integer toUpAge) {
+        return studentService.findByAgeBetween(byAge, toUpAge);
+    }
+    @GetMapping("/{studentId}/faculty")
+    public ResponseEntity<Faculty> getStudentFaculty(@PathVariable Long studentId) {
+        Optional<Student> studentOptional = studentService.findStudent(studentId);
+        if (studentOptional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Student student = studentOptional.get();
+        Faculty faculty = student.getFaculty();
+        if (faculty == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(faculty);
+    }
 }
