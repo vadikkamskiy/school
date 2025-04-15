@@ -23,14 +23,14 @@ public class FacultyController {
         this.studentService = null;
     }
 
-    // @GetMapping("{id}")
-    // public ResponseEntity<Optional<Faculty>> getFacultyInfo(@PathVariable Long id) {
-    //     Optional<Faculty> faculty = facultyService.findFaculty(id);
-    //     if (faculty.isEmpty() || faculty.get().getName().isBlank()) {
-    //         return ResponseEntity.notFound().build();
-    //     }
-    //     return ResponseEntity.ok(faculty);
-    // }
+    @GetMapping("{id}")
+    public ResponseEntity<Optional<Faculty>> getFacultyInfo(@PathVariable Long id) {
+        Optional<Faculty> faculty = facultyService.findFaculty(id);
+        if (faculty.isEmpty() || faculty.get().getName().isBlank()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(faculty);
+    }
 
     @PostMapping
     public Faculty createFaculty(@RequestBody Faculty faculty) {
