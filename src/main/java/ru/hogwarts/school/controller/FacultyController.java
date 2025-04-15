@@ -23,7 +23,7 @@ public class FacultyController {
         this.studentService = null;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{id}/students")
     public ResponseEntity<Optional<Faculty>> getFacultyInfo(@PathVariable Long id) {
         Optional<Faculty> faculty = facultyService.findFaculty(id);
         if (faculty.isEmpty() || faculty.get().getName().isBlank()) {
