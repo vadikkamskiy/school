@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 
@@ -30,8 +31,8 @@ public class Avatar {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] data;
 
-    @JsonIgnore
     @OneToOne
+    @JoinColumn(name = "student_id") 
     private Student student;
 
     public Avatar() {
