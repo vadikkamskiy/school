@@ -31,23 +31,26 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/all")
+    public ResponseEntity<Collection<Student>> findAllStudents() {
+        return ResponseEntity.ok(studentService.findAllStudents());
+    }
+
+    @GetMapping("/byAge")
+    public ResponseEntity<Collection<Student>> findStudentsByAge(@RequestParam Integer age) {
+        if (age > 0) {
+            return ResponseEntity.ok(studentService.findByAge(age));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/{id}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable Long id) {
         return studentService.findStudent(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping
-    public ResponseEntity<Collection<Student>> findStudents(@RequestParam(required = false) Integer age) {
-        if (age == null) {
-            return ResponseEntity.ok(studentService.findAllStudents());
-        }
-        if (age > 0) {
-            return ResponseEntity.ok(studentService.findByAge(age));
-        }
-        return ResponseEntity.badRequest().build();
-    }
 
     @PostMapping
     public Student createStudent(@RequestBody Student student) {
