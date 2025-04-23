@@ -3,6 +3,7 @@ package ru.hogwarts.school.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -26,7 +27,7 @@ public class Faculty {
 
     private String name;
     private String color;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "faculty")
     @JsonManagedReference
     private List<Student> students = new ArrayList<>();
