@@ -1,4 +1,4 @@
-package ru.hogwarts.controller;
+package ru.hogwarts.school.controller;
 
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
