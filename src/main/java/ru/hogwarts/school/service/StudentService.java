@@ -63,14 +63,15 @@ public class StudentService {
     public Avatar findAvatar(long studentId) {
         return avatarRepository.findByStudentId(studentId).orElseThrow();
     }
-
+    @Transactional
     public void uploadAvatar(Long studentId, MultipartFile file) throws IOException {
-        Optional<Student> student = findStudent(studentId);
-
+        Student student = studentRepository.getReferenceById(studentId);
+    
         Path filePath = Path.of(avatarsDir, studentId + "." + getExtension(file.getOriginalFilename()));
+    
         Files.createDirectories(filePath.getParent());
         Files.deleteIfExists(filePath);
-
+    
         try (InputStream is = file.getInputStream();
              OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
              BufferedInputStream bis = new BufferedInputStream(is, 1024);
@@ -78,14 +79,13 @@ public class StudentService {
         ) {
             bis.transferTo(bos);
         }
-
+    
         Avatar avatar = avatarRepository.findByStudentId(studentId).orElseGet(Avatar::new);
-        avatar.setStudent(student.get());
+        avatar.setStudent(student);
         avatar.setFilePath(filePath.toString());
         avatar.setFileSize(file.getSize());
         avatar.setMediaType(file.getContentType());
         avatar.setData(file.getBytes());
-
         avatarRepository.save(avatar);
     }
 
