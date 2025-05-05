@@ -21,11 +21,12 @@ import lombok.*;
 public class Faculty {
     @Id
     @GeneratedValue
-    // просто интересно... как проверяется как проект компилируется??
+
     private  long id;
 
     private String name;
     private String color;
+
     @JsonIgnore
     @OneToMany(mappedBy = "faculty")
     private List<Student> students = new ArrayList<>();
