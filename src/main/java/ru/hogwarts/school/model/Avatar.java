@@ -32,6 +32,7 @@ public class Avatar {
     private byte[] data;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "student_id") 
     @JsonIgnore
     private Student student;
