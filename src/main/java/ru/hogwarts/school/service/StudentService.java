@@ -29,6 +29,7 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final AvatarRepository avatarRepository;
+    
 
     public StudentService(StudentRepository studentRepository, AvatarRepository avatarRepository) {
         this.studentRepository = studentRepository;
@@ -87,6 +88,18 @@ public class StudentService {
         avatar.setMediaType(file.getContentType());
         avatar.setData(file.getBytes());
         avatarRepository.save(avatar);
+    }
+
+    public long countAllStudents() {
+        return studentRepository.countAllStudents();
+    }
+    
+    public Double getAverageAge() {
+        return studentRepository.getAverageAge();
+    }
+    
+    public Collection<Student> getLastFiveStudents() {
+        return studentRepository.findTop5ByOrderByIdDesc(org.springframework.data.domain.PageRequest.of(0, 5));
     }
 
     private String getExtension(String fileName) {

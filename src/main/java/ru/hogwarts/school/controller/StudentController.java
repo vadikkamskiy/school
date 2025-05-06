@@ -104,8 +104,20 @@ public class StudentController {
             .header(HttpHeaders.CONTENT_TYPE, mediaType)
             .header(HttpHeaders.CONTENT_DISPOSITION,"inline")
             .body(avatar.getData());
-    } catch (Exception e) {
-        return ResponseEntity.internalServerError().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
-}
+    @GetMapping("/count")
+    public long countStudents() {
+        return studentService.countAllStudents();
+    }
+    @GetMapping("/average-age")
+    public Double getAverageAge() {
+        return studentService.getAverageAge();
+    }
+    @GetMapping("/last-five")
+    public Collection<Student> getLastFiveStudents() {
+        return studentService.getLastFiveStudents();
+    }
 }
