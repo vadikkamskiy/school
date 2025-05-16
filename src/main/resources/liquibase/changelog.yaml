@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
-      file: liquibase/scripts/changeScript.sql
+      file: liquibase/scripts/addNameIndex.sql
+  - include:
+      file: liquibase/scripts/addFacultyAndColorIndex.sql
