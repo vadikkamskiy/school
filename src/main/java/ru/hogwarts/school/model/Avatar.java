@@ -1,8 +1,11 @@
 package ru.hogwarts.school.model;
 
 
+import java.sql.Types;
 import java.util.Arrays;
 import java.util.Objects;
+
+import org.hibernate.annotations.JdbcTypeCode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,7 +31,7 @@ public class Avatar {
     private long fileSize;
 
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
+    @JdbcTypeCode(Types.BINARY) 
     private byte[] data;
 
     @OneToOne
