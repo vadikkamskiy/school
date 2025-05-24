@@ -31,7 +31,7 @@ public class ParallelController {
         return studentRepository.findAll()
                 .parallelStream()
                 .map(Student::getName)
-                .filter(name.startsWith("А"))
+                .filter(name -> name.startsWith("А"))
                 .map(String::toUpperCase)
                 .sorted()
                 .collect(Collectors.toList());
