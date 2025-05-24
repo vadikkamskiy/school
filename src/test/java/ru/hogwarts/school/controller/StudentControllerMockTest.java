@@ -53,7 +53,7 @@ class StudentControllerMockTest {
         student.setAge(12);
         Mockito.when(studentService.findAllStudents()).thenReturn(List.of(student));
 
-        mockMvc.perform(get("/student"))
+        mockMvc.perform(get("/student/all"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Hermione"));
     }
