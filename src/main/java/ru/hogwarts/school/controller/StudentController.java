@@ -2,6 +2,8 @@ package ru.hogwarts.school.controller;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -119,5 +121,47 @@ public class StudentController {
     @GetMapping("/last-five")
     public Collection<Student> getLastFiveStudents() {
         return studentService.getLastFiveStudents();
+    }
+
+    @GetMapping("/print-parallel")
+    public void PrintParallel() {
+        List<String> names = studentService.getAllNames();
+        
+        System.out.println(names.get(0));
+        System.out.println(names.get(1));
+        Thread thread1 = new Thread(() -> {
+            System.out.println(names.get(2));
+            System.out.println(names.get(3));
+        });
+        Thread thread2 = new Thread(() -> {
+            System.out.println(names.get(4));
+            System.out.println(names.get(5));
+        });
+        thread1.start();
+        thread2.start();
+    }
+
+    @GetMapping("/students/print-synchronized")
+    public void printNamesSynchronized(){
+        List<String> names = studentService.getAllNames();
+
+        System.out.println(names.get(0));
+        System.out.println(names.get(1));
+
+        Thread thread1 = new Thread(() -> {
+            printSync(names.get(2));
+            printSync(names.get(3));
+        });
+
+        Thread thread2 = new Thread(() -> {
+            printSync(names.get(4));
+            printSync(names.get(5));
+        });
+
+        thread1.start();
+        thread2.start();
+    }
+    private synchronized void printSync(String name) {
+        System.out.println(Thread.currentThread().getName() + ": " + name);
     }
 }

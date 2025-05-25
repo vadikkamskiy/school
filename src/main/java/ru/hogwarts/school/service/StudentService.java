@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
@@ -128,5 +129,9 @@ public class StudentService {
     private String getExtension(String fileName) {
         log.info("Was invoked method for get extension");
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+
+    public List<String> getAllNames() {
+        return studentRepository.findAllNames();
     }
 }
