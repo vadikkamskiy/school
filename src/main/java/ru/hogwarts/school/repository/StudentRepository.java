@@ -24,4 +24,8 @@ public interface StudentRepository extends JpaRepository<Student,Long>{
     @Query("SELECT s FROM Student s ORDER BY s.id DESC")
     List<Student> findTop5ByOrderByIdDesc(Pageable pageable);
     Collection<Student> findTop5ByOrderByIdDesc(PageRequest of);
+
+    @Query("SELECT s.name FROM Student s")
+    List<String> findAllNames();
+
 }

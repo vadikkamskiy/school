@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -104,5 +105,9 @@ public class StudentService {
 
     private String getExtension(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+
+    public List<String> getAllNames() {
+        return studentRepository.findAllNames();
     }
 }
